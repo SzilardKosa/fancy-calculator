@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fancy calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- State of num1 -->
+    <h5 class="bts">The state of the first number</h5>
+    <input id="num1-cb1" class="checkbox" type="checkbox" />
+    <input id="num1-cb2" class="checkbox" type="checkbox" />
+    <input id="num1-cb3" class="checkbox" type="checkbox" />
+    <input id="num1-cb4" class="checkbox" type="checkbox" />
+    <!-- State of num2 -->
+    <h5 class="bts">The state of the second number</h5>
+    <input id="num2-cb1" class="checkbox" type="checkbox" />
+    <input id="num2-cb2" class="checkbox" type="checkbox" />
+    <input id="num2-cb3" class="checkbox" type="checkbox" />
+    <input id="num2-cb4" class="checkbox" type="checkbox" />
+    <!-- Operation type -->
+    <h5 class="bts">The state of the operation type</h5>
+    <input id="op-cb1" class="checkbox" type="checkbox" />
+    <input id="op-cb2" class="checkbox" type="checkbox" />
+
+    <div class="content">
+      <div class="counter section" id="num1">
+        <div class="inc">
+          <label for="num1-cb1"></label>
+          <label for="num1-cb2"></label>
+          <label for="num1-cb3"></label>
+          <label for="num1-cb4"></label>
+        </div>
+        <ul class="cells">
+          <li class="cell">0</li>
+          <li class="cell">1</li>
+          <li class="cell">2</li>
+          <li class="cell">3</li>
+          <li class="cell">4</li>
+          <li class="cell">5</li>
+          <li class="cell">6</li>
+          <li class="cell">7</li>
+          <li class="cell">8</li>
+          <li class="cell">9</li>
+        </ul>
+        <div class="dec">
+          <label for="num1-cb1"></label>
+          <label for="num1-cb2"></label>
+          <label for="num1-cb3"></label>
+          <label for="num1-cb4"></label>
+        </div>
+      </div>
+
+      <div class="operand section">
+        <ul class="cells">
+          <li class="cell">+</li>
+          <li class="cell">-</li>
+          <li class="cell">*</li>
+          <li class="cell">/</li>
+        </ul>
+      </div>
+
+      <div class="counter section" id="num2">
+        <div class="inc">
+          <label for="num2-cb1"></label>
+          <label for="num2-cb2"></label>
+          <label for="num2-cb3"></label>
+          <label for="num2-cb4"></label>
+        </div>
+        <ul class="cells">
+          <li class="cell">0</li>
+          <li class="cell">1</li>
+          <li class="cell">2</li>
+          <li class="cell">3</li>
+          <li class="cell">4</li>
+          <li class="cell">5</li>
+          <li class="cell">6</li>
+          <li class="cell">7</li>
+          <li class="cell">8</li>
+          <li class="cell">9</li>
+        </ul>
+        <div class="dec">
+          <label for="num2-cb1"></label>
+          <label for="num2-cb2"></label>
+          <label for="num2-cb3"></label>
+          <label for="num2-cb4"></label>
+        </div>
+      </div>
+
+      <div class="equals section">
+        <div class="cell">=</div>
+      </div>
+
+      <div class="result section">
+        <ul class="cells" id="result-tens">
+          <li class="cell">0</li>
+          <li class="cell">1</li>
+          <li class="cell">2</li>
+          <li class="cell">3</li>
+          <li class="cell">4</li>
+          <li class="cell">5</li>
+          <li class="cell">6</li>
+          <li class="cell">7</li>
+          <li class="cell">8</li>
+          <li class="cell">9</li>
+        </ul>
+        <ul class="cells" id="result-ones">
+          <li class="cell">0</li>
+          <li class="cell">1</li>
+          <li class="cell">2</li>
+          <li class="cell">3</li>
+          <li class="cell">4</li>
+          <li class="cell">5</li>
+          <li class="cell">6</li>
+          <li class="cell">7</li>
+          <li class="cell">8</li>
+          <li class="cell">9</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

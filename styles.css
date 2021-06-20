@@ -1,0 +1,60 @@
+:root {
+  /* dark theme colors */
+  --dark-bg: teal;
+  --dark-bg2: orangered;
+  --dark-text: white;
+  /* light theme colors */
+  --light-bg: lightblue;
+  --light-bg2: lightsalmon;
+  --light-text: black;
+
+  /* default colors */
+  --bg-color: var(--dark-bg);
+  --text-color: var(--dark-text);
+
+  /* label display state */
+  --num1-lb1-inc: none;
+  --num1-lb1-dec: none;
+  --num1-lb2-inc: none;
+  --num1-lb2-dec: none;
+  --num1-lb3-inc: none;
+  --num1-lb3-dec: none;
+  --num1-lb4-inc: none;
+  --num1-lb4-dec: none;
+
+  --num2-lb1-inc: none;
+  --num2-lb1-dec: none;
+  --num2-lb2-inc: none;
+  --num2-lb2-dec: none;
+  --num2-lb3-inc: none;
+  --num2-lb3-dec: none;
+  --num2-lb4-inc: none;
+  --num2-lb4-dec: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Behind the scenes */
+.bts {
+  display: none;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.checkbox {
+  display: none;
+}
+
+.content {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: larger;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  /* transition: all 0.3s ease; */
+}
