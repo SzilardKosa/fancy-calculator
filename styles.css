@@ -12,24 +12,33 @@
   --bg-color: var(--dark-bg);
   --text-color: var(--dark-text);
 
+  /* sizes */
+  --display-border: 1rem;
+  --cell-height: 20rem;
+  --cell-width: 12rem;
+
+  /* counter state */
+  --num1-top-margin: 0rem;
+  --num2-top-margin: 0rem;
+
   /* label display state */
   --num1-lb1-inc: none;
-  --num1-lb1-dec: none;
   --num1-lb2-inc: none;
-  --num1-lb2-dec: none;
-  --num1-lb3-inc: none;
-  --num1-lb3-dec: none;
+  --num1-lb3-inc: block;
   --num1-lb4-inc: none;
-  --num1-lb4-dec: none;
+  --num1-lb1-dec: none;
+  --num1-lb2-dec: none;
+  --num1-lb3-dec: none;
+  --num1-lb4-dec: block;
 
   --num2-lb1-inc: none;
-  --num2-lb1-dec: none;
   --num2-lb2-inc: none;
-  --num2-lb2-dec: none;
-  --num2-lb3-inc: none;
-  --num2-lb3-dec: none;
+  --num2-lb3-inc: block;
   --num2-lb4-inc: none;
-  --num2-lb4-dec: none;
+  --num2-lb1-dec: none;
+  --num2-lb2-dec: none;
+  --num2-lb3-dec: none;
+  --num2-lb4-dec: block;
 }
 
 * {
@@ -47,6 +56,7 @@
   display: none;
 }
 
+/* Main content */
 .content {
   background-color: var(--bg-color);
   color: var(--text-color);
@@ -56,5 +66,426 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  transition: all 0.3s ease;
+}
+
+/* Section */
+.section {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+/* Counter */
+.counter {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Counter buttons */
+.inc {
+  margin-bottom: 2rem;
+}
+.inc::after {
+  content: "▲Inc▲";
+}
+.dec {
+  margin-top: 2rem;
+}
+.dec:after {
+  content: "▼Dec▼";
+}
+.button {
+  color: black;
+  font-size: 2rem;
+  background-color: white;
+  border: var(--display-border) outset white;
+  height: 4rem;
+  width: calc(var(--cell-width) + var(--display-border) * 2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.button:hover {
+  background-color: lightslategrey;
+  border: var(--display-border) outset lightslategrey;
+}
+.button:active {
+  background-color: lightslategrey;
+  border: var(--display-border) inset lightslategrey;
+}
+.button label {
+  position: absolute;
+  top: calc(-1 * var(--display-border));
+  left: calc(-1 * var(--display-border));
+  bottom: calc(-1 * var(--display-border));
+  right: calc(-1 * var(--display-border));
+}
+
+/* Num1 label states */
+.inc label[for="num1-cb1"] {
+  display: var(--num1-lb1-inc);
+}
+.inc label[for="num1-cb2"] {
+  display: var(--num1-lb2-inc);
+}
+.inc label[for="num1-cb3"] {
+  display: var(--num1-lb3-inc);
+}
+.inc label[for="num1-cb4"] {
+  display: var(--num1-lb4-inc);
+}
+.dec label[for="num1-cb1"] {
+  display: var(--num1-lb1-dec);
+}
+.dec label[for="num1-cb2"] {
+  display: var(--num1-lb2-dec);
+}
+.dec label[for="num1-cb3"] {
+  display: var(--num1-lb3-dec);
+}
+.dec label[for="num1-cb4"] {
+  display: var(--num1-lb4-dec);
+}
+
+/* Num2 label states */
+.inc label[for="num2-cb1"] {
+  display: var(--num2-lb1-inc);
+}
+.inc label[for="num2-cb2"] {
+  display: var(--num2-lb2-inc);
+}
+.inc label[for="num2-cb3"] {
+  display: var(--num2-lb3-inc);
+}
+.inc label[for="num2-cb4"] {
+  display: var(--num2-lb4-inc);
+}
+.dec label[for="num2-cb1"] {
+  display: var(--num2-lb1-dec);
+}
+.dec label[for="num2-cb2"] {
+  display: var(--num2-lb2-dec);
+}
+.dec label[for="num2-cb3"] {
+  display: var(--num2-lb3-dec);
+}
+.dec label[for="num2-cb4"] {
+  display: var(--num2-lb4-dec);
+}
+
+/* Counter display */
+.display {
+  border: var(--display-border) outset white;
+  height: calc(var(--cell-height) + var(--display-border) * 2);
+  width: calc(var(--cell-width) + var(--display-border) * 2);
+  overflow: hidden;
+}
+
+.cells {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  height: calc(var(--cell-height) * 10);
+  width: var(--cell-width);
   /* transition: all 0.3s ease; */
+}
+
+#num1 .cells {
+  margin-top: var(--num1-top-margin);
+}
+#num2 .cells {
+  margin-top: var(--num2-top-margin);
+}
+
+.cell {
+  /* colors */
+  color: white;
+  background-color: black;
+  border: 2px solid white;
+  /* sizes */
+  font-size: 10rem;
+  height: var(--cell-height);
+  width: var(--cell-width);
+  /* alignmnet */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Excess-3 Gray */
+/* 4|3|2|1 */
+/* ------- */
+/*  | |1|  */
+/*  |1|1|  */
+/*  |1|1|1 */
+/*  |1| |1 */
+/*  |1| |  */
+/* 1|1| |  */
+/* 1|1| |1 */
+/* 1|1|1|1 */
+/* 1|1|1|  */
+/* 1| |1|  */
+
+/* State Changes for num1 */
+#num1-cb1 ~ #num1-cb2:checked ~ #num1-cb3 ~ #num1-cb4 ~ .content {
+  --num1-top-margin: 0;
+
+  --num1-lb1-inc: none;
+  --num1-lb2-inc: none;
+  --num1-lb3-inc: block;
+  --num1-lb4-inc: none;
+
+  --num1-lb1-dec: none;
+  --num1-lb2-dec: none;
+  --num1-lb3-dec: none;
+  --num1-lb4-dec: block;
+}
+#num1-cb1 ~ #num1-cb2:checked ~ #num1-cb3:checked ~ #num1-cb4 ~ .content {
+  --num1-top-margin: calc(-1 * var(--cell-height));
+
+  --num1-lb1-inc: block;
+  --num1-lb2-inc: none;
+  --num1-lb3-inc: none;
+  --num1-lb4-inc: none;
+
+  --num1-lb1-dec: none;
+  --num1-lb2-dec: none;
+  --num1-lb3-dec: block;
+  --num1-lb4-dec: none;
+}
+#num1-cb1:checked ~ #num1-cb2:checked ~ #num1-cb3:checked ~ #num1-cb4 ~ .content {
+  --num1-top-margin: calc(-2 * var(--cell-height));
+
+  --num1-lb1-inc: none;
+  --num1-lb2-inc: block;
+  --num1-lb3-inc: none;
+  --num1-lb4-inc: none;
+
+  --num1-lb1-dec: block;
+  --num1-lb2-dec: none;
+  --num1-lb3-dec: none;
+  --num1-lb4-dec: none;
+}
+#num1-cb1:checked ~ #num1-cb2 ~ #num1-cb3:checked ~ #num1-cb4 ~ .content {
+  --num1-top-margin: calc(-3 * var(--cell-height));
+
+  --num1-lb1-inc: block;
+  --num1-lb2-inc: none;
+  --num1-lb3-inc: none;
+  --num1-lb4-inc: none;
+
+  --num1-lb1-dec: none;
+  --num1-lb2-dec: block;
+  --num1-lb3-dec: none;
+  --num1-lb4-dec: none;
+}
+#num1-cb1 ~ #num1-cb2 ~ #num1-cb3:checked ~ #num1-cb4 ~ .content {
+  --num1-top-margin: calc(-4 * var(--cell-height));
+
+  --num1-lb1-inc: none;
+  --num1-lb2-inc: none;
+  --num1-lb3-inc: none;
+  --num1-lb4-inc: block;
+
+  --num1-lb1-dec: block;
+  --num1-lb2-dec: none;
+  --num1-lb3-dec: none;
+  --num1-lb4-dec: none;
+}
+#num1-cb1 ~ #num1-cb2 ~ #num1-cb3:checked ~ #num1-cb4:checked ~ .content {
+  --num1-top-margin: calc(-5 * var(--cell-height));
+
+  --num1-lb1-inc: block;
+  --num1-lb2-inc: none;
+  --num1-lb3-inc: none;
+  --num1-lb4-inc: none;
+
+  --num1-lb1-dec: none;
+  --num1-lb2-dec: none;
+  --num1-lb3-dec: none;
+  --num1-lb4-dec: block;
+}
+#num1-cb1:checked ~ #num1-cb2 ~ #num1-cb3:checked ~ #num1-cb4:checked ~ .content {
+  --num1-top-margin: calc(-6 * var(--cell-height));
+
+  --num1-lb1-inc: none;
+  --num1-lb2-inc: block;
+  --num1-lb3-inc: none;
+  --num1-lb4-inc: none;
+
+  --num1-lb1-dec: block;
+  --num1-lb2-dec: none;
+  --num1-lb3-dec: none;
+  --num1-lb4-dec: none;
+}
+#num1-cb1:checked ~ #num1-cb2:checked ~ #num1-cb3:checked ~ #num1-cb4:checked ~ .content {
+  --num1-top-margin: calc(-7 * var(--cell-height));
+
+  --num1-lb1-inc: block;
+  --num1-lb2-inc: none;
+  --num1-lb3-inc: none;
+  --num1-lb4-inc: none;
+
+  --num1-lb1-dec: none;
+  --num1-lb2-dec: block;
+  --num1-lb3-dec: none;
+  --num1-lb4-dec: none;
+}
+#num1-cb1 ~ #num1-cb2:checked ~ #num1-cb3:checked ~ #num1-cb4:checked ~ .content {
+  --num1-top-margin: calc(-8 * var(--cell-height));
+
+  --num1-lb1-inc: none;
+  --num1-lb2-inc: none;
+  --num1-lb3-inc: block;
+  --num1-lb4-inc: none;
+
+  --num1-lb1-dec: block;
+  --num1-lb2-dec: none;
+  --num1-lb3-dec: none;
+  --num1-lb4-dec: none;
+}
+#num1-cb1 ~ #num1-cb2:checked ~ #num1-cb3 ~ #num1-cb4:checked ~ .content {
+  --num1-top-margin: calc(-9 * var(--cell-height));
+
+  --num1-lb1-inc: none;
+  --num1-lb2-inc: none;
+  --num1-lb3-inc: none;
+  --num1-lb4-inc: block;
+
+  --num1-lb1-dec: none;
+  --num1-lb2-dec: none;
+  --num1-lb3-dec: block;
+  --num1-lb4-dec: none;
+}
+/* State Changes for num2 */
+#num2-cb1 ~ #num2-cb2:checked ~ #num2-cb3 ~ #num2-cb4 ~ .content {
+  --num2-top-margin: 0;
+
+  --num2-lb1-inc: none;
+  --num2-lb2-inc: none;
+  --num2-lb3-inc: block;
+  --num2-lb4-inc: none;
+
+  --num2-lb1-dec: none;
+  --num2-lb2-dec: none;
+  --num2-lb3-dec: none;
+  --num2-lb4-dec: block;
+}
+#num2-cb1 ~ #num2-cb2:checked ~ #num2-cb3:checked ~ #num2-cb4 ~ .content {
+  --num2-top-margin: calc(-1 * var(--cell-height));
+
+  --num2-lb1-inc: block;
+  --num2-lb2-inc: none;
+  --num2-lb3-inc: none;
+  --num2-lb4-inc: none;
+
+  --num2-lb1-dec: none;
+  --num2-lb2-dec: none;
+  --num2-lb3-dec: block;
+  --num2-lb4-dec: none;
+}
+#num2-cb1:checked ~ #num2-cb2:checked ~ #num2-cb3:checked ~ #num2-cb4 ~ .content {
+  --num2-top-margin: calc(-2 * var(--cell-height));
+
+  --num2-lb1-inc: none;
+  --num2-lb2-inc: block;
+  --num2-lb3-inc: none;
+  --num2-lb4-inc: none;
+
+  --num2-lb1-dec: block;
+  --num2-lb2-dec: none;
+  --num2-lb3-dec: none;
+  --num2-lb4-dec: none;
+}
+#num2-cb1:checked ~ #num2-cb2 ~ #num2-cb3:checked ~ #num2-cb4 ~ .content {
+  --num2-top-margin: calc(-3 * var(--cell-height));
+
+  --num2-lb1-inc: block;
+  --num2-lb2-inc: none;
+  --num2-lb3-inc: none;
+  --num2-lb4-inc: none;
+
+  --num2-lb1-dec: none;
+  --num2-lb2-dec: block;
+  --num2-lb3-dec: none;
+  --num2-lb4-dec: none;
+}
+#num2-cb1 ~ #num2-cb2 ~ #num2-cb3:checked ~ #num2-cb4 ~ .content {
+  --num2-top-margin: calc(-4 * var(--cell-height));
+
+  --num2-lb1-inc: none;
+  --num2-lb2-inc: none;
+  --num2-lb3-inc: none;
+  --num2-lb4-inc: block;
+
+  --num2-lb1-dec: block;
+  --num2-lb2-dec: none;
+  --num2-lb3-dec: none;
+  --num2-lb4-dec: none;
+}
+#num2-cb1 ~ #num2-cb2 ~ #num2-cb3:checked ~ #num2-cb4:checked ~ .content {
+  --num2-top-margin: calc(-5 * var(--cell-height));
+
+  --num2-lb1-inc: block;
+  --num2-lb2-inc: none;
+  --num2-lb3-inc: none;
+  --num2-lb4-inc: none;
+
+  --num2-lb1-dec: none;
+  --num2-lb2-dec: none;
+  --num2-lb3-dec: none;
+  --num2-lb4-dec: block;
+}
+#num2-cb1:checked ~ #num2-cb2 ~ #num2-cb3:checked ~ #num2-cb4:checked ~ .content {
+  --num2-top-margin: calc(-6 * var(--cell-height));
+
+  --num2-lb1-inc: none;
+  --num2-lb2-inc: block;
+  --num2-lb3-inc: none;
+  --num2-lb4-inc: none;
+
+  --num2-lb1-dec: block;
+  --num2-lb2-dec: none;
+  --num2-lb3-dec: none;
+  --num2-lb4-dec: none;
+}
+#num2-cb1:checked ~ #num2-cb2:checked ~ #num2-cb3:checked ~ #num2-cb4:checked ~ .content {
+  --num2-top-margin: calc(-7 * var(--cell-height));
+
+  --num2-lb1-inc: block;
+  --num2-lb2-inc: none;
+  --num2-lb3-inc: none;
+  --num2-lb4-inc: none;
+
+  --num2-lb1-dec: none;
+  --num2-lb2-dec: block;
+  --num2-lb3-dec: none;
+  --num2-lb4-dec: none;
+}
+#num2-cb1 ~ #num2-cb2:checked ~ #num2-cb3:checked ~ #num2-cb4:checked ~ .content {
+  --num2-top-margin: calc(-8 * var(--cell-height));
+
+  --num2-lb1-inc: none;
+  --num2-lb2-inc: none;
+  --num2-lb3-inc: block;
+  --num2-lb4-inc: none;
+
+  --num2-lb1-dec: block;
+  --num2-lb2-dec: none;
+  --num2-lb3-dec: none;
+  --num2-lb4-dec: none;
+}
+#num2-cb1 ~ #num2-cb2:checked ~ #num2-cb3 ~ #num2-cb4:checked ~ .content {
+  --num2-top-margin: calc(-9 * var(--cell-height));
+
+  --num2-lb1-inc: none;
+  --num2-lb2-inc: none;
+  --num2-lb3-inc: none;
+  --num2-lb4-inc: block;
+
+  --num2-lb1-dec: none;
+  --num2-lb2-dec: none;
+  --num2-lb3-dec: block;
+  --num2-lb4-dec: none;
 }
