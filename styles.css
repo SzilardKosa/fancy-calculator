@@ -20,6 +20,8 @@
   /* counter state */
   --num1-top-margin: 0rem;
   --num2-top-margin: 0rem;
+  /* operand state */
+  --op-top-margin: 0rem;
 
   /* label display state */
   --num1-lb1-inc: none;
@@ -39,6 +41,9 @@
   --num2-lb2-dec: none;
   --num2-lb3-dec: none;
   --num2-lb4-dec: block;
+
+  --op-lb1: block;
+  --op-lb2: none;
 }
 
 * {
@@ -173,6 +178,13 @@
 .dec label[for="num2-cb4"] {
   display: var(--num2-lb4-dec);
 }
+/* Op label states */
+label[for="op-cb1"] {
+  display: var(--op-lb1);
+}
+label[for="op-cb2"] {
+  display: var(--op-lb2);
+}
 
 /* Counter display */
 .display {
@@ -213,7 +225,69 @@
   justify-content: center;
 }
 
-/* Excess-3 Gray */
+/* Operand display */
+.operand {
+  position: relative;
+}
+.operand .display:hover {
+  border: var(--display-border) outset lightslategrey;
+}
+.operand .display:hover .cell {
+  border: 2px solid lightslategrey;
+}
+.operand .display:active {
+  border: var(--display-border) inset lightslategrey;
+}
+.operand .display:active .cell {
+  border: 2px solid rgb(53, 61, 69);
+}
+
+.operand .display label {
+  position: absolute;
+  top: calc(-1 * var(--display-border));
+  left: calc(-1 * var(--display-border));
+  bottom: calc(-1 * var(--display-border));
+  right: calc(-1 * var(--display-border));
+  z-index: 1;
+}
+
+.operand .cells {
+  margin-top: var(--op-top-margin);
+}
+
+/* Gray code */
+/* 2|1 */
+/* --- */
+/*  |  */
+/*  |1 */
+/* 1|1 */
+/* 1|  */
+#op-cb1 ~ #op-cb2 ~ .content {
+  --op-top-margin: 0;
+
+  --op-lb1: block;
+  --op-lb2: none;
+}
+#op-cb1:checked ~ #op-cb2 ~ .content {
+  --op-top-margin: calc(-1 * var(--cell-height));
+
+  --op-lb1: none;
+  --op-lb2: block;
+}
+#op-cb1:checked ~ #op-cb2:checked ~ .content {
+  --op-top-margin: calc(-2 * var(--cell-height));
+
+  --op-lb1: block;
+  --op-lb2: none;
+}
+#op-cb1 ~ #op-cb2:checked ~ .content {
+  --op-top-margin: calc(-3 * var(--cell-height));
+
+  --op-lb1: none;
+  --op-lb2: block;
+}
+
+/* Excess-3 Gray code */
 /* 4|3|2|1 */
 /* ------- */
 /*  | |1|  */
