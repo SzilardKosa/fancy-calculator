@@ -244,10 +244,10 @@ label[for="op-cb2"] {
 
 .operand .display label {
   position: absolute;
-  top: calc(-1 * var(--display-border));
-  left: calc(-1 * var(--display-border));
-  bottom: calc(-1 * var(--display-border));
-  right: calc(-1 * var(--display-border));
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   z-index: 1;
 }
 
