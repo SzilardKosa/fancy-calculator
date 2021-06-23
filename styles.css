@@ -300,7 +300,10 @@ label[for="op-cb2"] {
   --result-value: calc(var(--num1-value) - var(--num2-value));
   --int-div: calc((var(--result-value) / 10 - 0.49) * var(--shf) / var(--shf));
   --result-tens-margin: calc((var(--int-div) + 1) * -1 * var(--cell-height));
-  --result-ones-margin: calc((var(--result-value) - 10 * var(--int-div)) * -1 * var(--cell-height));
+  --result-ones-margin: calc(
+    (var(--result-value) * (var(--int-div) + 1) - var(--result-value) * (var(--int-div) * -1)) * -1 *
+      var(--cell-height)
+  );
 
   --op-lb1: none;
   --op-lb2: block;
