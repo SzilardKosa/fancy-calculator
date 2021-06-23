@@ -18,10 +18,18 @@
   --cell-width: 12rem;
 
   /* counter state */
-  --num1-top-margin: 0rem;
-  --num2-top-margin: 0rem;
+  --num1-value: 0;
+  --num2-value: 0;
   /* operand state */
   --op-top-margin: 0rem;
+  /* result state */
+  --result-value: 0;
+  --int-div: 0;
+  --result-tens-margin: 0rem;
+  --result-ones-margin: 0rem;
+  /* const */
+  /* https://stackoverflow.com/questions/37754542/css-calc-round-down-with-two-decimal-cases */
+  --shf: 4.9406564584124654e-324;
 
   /* label display state */
   --num1-lb1-inc: none;
@@ -204,10 +212,10 @@ label[for="op-cb2"] {
 }
 
 #num1 .cells {
-  margin-top: var(--num1-top-margin);
+  margin-top: calc(-1 * var(--num1-value) * var(--cell-height));
 }
 #num2 .cells {
-  margin-top: var(--num2-top-margin);
+  margin-top: calc(-1 * var(--num2-value) * var(--cell-height));
 }
 
 .cell {
@@ -255,6 +263,19 @@ label[for="op-cb2"] {
   margin-top: var(--op-top-margin);
 }
 
+/* Result display */
+.result {
+  display: flex;
+  flex-direction: row;
+}
+
+#result-tens.cells {
+  margin-top: var(--result-tens-margin);
+}
+#result-ones.cells {
+  margin-top: var(--result-ones-margin);
+}
+
 /* Gray code */
 /* 2|1 */
 /* --- */
@@ -264,24 +285,44 @@ label[for="op-cb2"] {
 /* 1|  */
 #op-cb1 ~ #op-cb2 ~ .content {
   --op-top-margin: 0;
+  /* addition result */
+  --result-value: calc(var(--num1-value) + var(--num2-value));
+  --int-div: calc((var(--result-value) / 10 - 0.49) * var(--shf) / var(--shf));
+  --result-tens-margin: calc((var(--int-div) + 1) * -1 * var(--cell-height));
+  --result-ones-margin: calc((var(--result-value) - 10 * var(--int-div)) * -1 * var(--cell-height));
 
   --op-lb1: block;
   --op-lb2: none;
 }
 #op-cb1:checked ~ #op-cb2 ~ .content {
   --op-top-margin: calc(-1 * var(--cell-height));
+  /* subtraction result */
+  --result-value: calc(var(--num1-value) - var(--num2-value));
+  --int-div: calc((var(--result-value) / 10 - 0.49) * var(--shf) / var(--shf));
+  --result-tens-margin: calc((var(--int-div) + 1) * -1 * var(--cell-height));
+  --result-ones-margin: calc((var(--result-value) - 10 * var(--int-div)) * -1 * var(--cell-height));
 
   --op-lb1: none;
   --op-lb2: block;
 }
 #op-cb1:checked ~ #op-cb2:checked ~ .content {
   --op-top-margin: calc(-2 * var(--cell-height));
+  /* multiplication result */
+  --result-value: calc(var(--num1-value) * var(--num2-value));
+  --int-div: calc((var(--result-value) / 10 - 0.49) * var(--shf) / var(--shf));
+  --result-tens-margin: calc((var(--int-div) + 1) * -1 * var(--cell-height));
+  --result-ones-margin: calc((var(--result-value) - 10 * var(--int-div)) * -1 * var(--cell-height));
 
   --op-lb1: block;
   --op-lb2: none;
 }
 #op-cb1 ~ #op-cb2:checked ~ .content {
   --op-top-margin: calc(-3 * var(--cell-height));
+  /* division result */
+  --result-value: calc(var(--num1-value) / var(--num2-value));
+  --int-div: calc((var(--result-value) / 10 - 0.49) * var(--shf) / var(--shf));
+  --result-tens-margin: calc((var(--int-div) + 1) * -1 * var(--cell-height));
+  --result-ones-margin: calc((var(--result-value) - 10 * var(--int-div)) * -1 * var(--cell-height));
 
   --op-lb1: none;
   --op-lb2: block;
@@ -303,7 +344,7 @@ label[for="op-cb2"] {
 
 /* State Changes for num1 */
 #num1-cb1 ~ #num1-cb2:checked ~ #num1-cb3 ~ #num1-cb4 ~ .content {
-  --num1-top-margin: 0;
+  --num1-value: 0;
 
   --num1-lb1-inc: none;
   --num1-lb2-inc: none;
@@ -316,7 +357,7 @@ label[for="op-cb2"] {
   --num1-lb4-dec: block;
 }
 #num1-cb1 ~ #num1-cb2:checked ~ #num1-cb3:checked ~ #num1-cb4 ~ .content {
-  --num1-top-margin: calc(-1 * var(--cell-height));
+  --num1-value: 1;
 
   --num1-lb1-inc: block;
   --num1-lb2-inc: none;
@@ -329,7 +370,7 @@ label[for="op-cb2"] {
   --num1-lb4-dec: none;
 }
 #num1-cb1:checked ~ #num1-cb2:checked ~ #num1-cb3:checked ~ #num1-cb4 ~ .content {
-  --num1-top-margin: calc(-2 * var(--cell-height));
+  --num1-value: 2;
 
   --num1-lb1-inc: none;
   --num1-lb2-inc: block;
@@ -342,7 +383,7 @@ label[for="op-cb2"] {
   --num1-lb4-dec: none;
 }
 #num1-cb1:checked ~ #num1-cb2 ~ #num1-cb3:checked ~ #num1-cb4 ~ .content {
-  --num1-top-margin: calc(-3 * var(--cell-height));
+  --num1-value: 3;
 
   --num1-lb1-inc: block;
   --num1-lb2-inc: none;
@@ -355,7 +396,7 @@ label[for="op-cb2"] {
   --num1-lb4-dec: none;
 }
 #num1-cb1 ~ #num1-cb2 ~ #num1-cb3:checked ~ #num1-cb4 ~ .content {
-  --num1-top-margin: calc(-4 * var(--cell-height));
+  --num1-value: 4;
 
   --num1-lb1-inc: none;
   --num1-lb2-inc: none;
@@ -368,7 +409,7 @@ label[for="op-cb2"] {
   --num1-lb4-dec: none;
 }
 #num1-cb1 ~ #num1-cb2 ~ #num1-cb3:checked ~ #num1-cb4:checked ~ .content {
-  --num1-top-margin: calc(-5 * var(--cell-height));
+  --num1-value: 5;
 
   --num1-lb1-inc: block;
   --num1-lb2-inc: none;
@@ -381,7 +422,7 @@ label[for="op-cb2"] {
   --num1-lb4-dec: block;
 }
 #num1-cb1:checked ~ #num1-cb2 ~ #num1-cb3:checked ~ #num1-cb4:checked ~ .content {
-  --num1-top-margin: calc(-6 * var(--cell-height));
+  --num1-value: 6;
 
   --num1-lb1-inc: none;
   --num1-lb2-inc: block;
@@ -394,7 +435,7 @@ label[for="op-cb2"] {
   --num1-lb4-dec: none;
 }
 #num1-cb1:checked ~ #num1-cb2:checked ~ #num1-cb3:checked ~ #num1-cb4:checked ~ .content {
-  --num1-top-margin: calc(-7 * var(--cell-height));
+  --num1-value: 7;
 
   --num1-lb1-inc: block;
   --num1-lb2-inc: none;
@@ -407,7 +448,7 @@ label[for="op-cb2"] {
   --num1-lb4-dec: none;
 }
 #num1-cb1 ~ #num1-cb2:checked ~ #num1-cb3:checked ~ #num1-cb4:checked ~ .content {
-  --num1-top-margin: calc(-8 * var(--cell-height));
+  --num1-value: 8;
 
   --num1-lb1-inc: none;
   --num1-lb2-inc: none;
@@ -420,7 +461,7 @@ label[for="op-cb2"] {
   --num1-lb4-dec: none;
 }
 #num1-cb1 ~ #num1-cb2:checked ~ #num1-cb3 ~ #num1-cb4:checked ~ .content {
-  --num1-top-margin: calc(-9 * var(--cell-height));
+  --num1-value: 9;
 
   --num1-lb1-inc: none;
   --num1-lb2-inc: none;
@@ -434,7 +475,7 @@ label[for="op-cb2"] {
 }
 /* State Changes for num2 */
 #num2-cb1 ~ #num2-cb2:checked ~ #num2-cb3 ~ #num2-cb4 ~ .content {
-  --num2-top-margin: 0;
+  --num2-value: 0;
 
   --num2-lb1-inc: none;
   --num2-lb2-inc: none;
@@ -447,7 +488,7 @@ label[for="op-cb2"] {
   --num2-lb4-dec: block;
 }
 #num2-cb1 ~ #num2-cb2:checked ~ #num2-cb3:checked ~ #num2-cb4 ~ .content {
-  --num2-top-margin: calc(-1 * var(--cell-height));
+  --num2-value: 1;
 
   --num2-lb1-inc: block;
   --num2-lb2-inc: none;
@@ -460,7 +501,7 @@ label[for="op-cb2"] {
   --num2-lb4-dec: none;
 }
 #num2-cb1:checked ~ #num2-cb2:checked ~ #num2-cb3:checked ~ #num2-cb4 ~ .content {
-  --num2-top-margin: calc(-2 * var(--cell-height));
+  --num2-value: 2;
 
   --num2-lb1-inc: none;
   --num2-lb2-inc: block;
@@ -473,7 +514,7 @@ label[for="op-cb2"] {
   --num2-lb4-dec: none;
 }
 #num2-cb1:checked ~ #num2-cb2 ~ #num2-cb3:checked ~ #num2-cb4 ~ .content {
-  --num2-top-margin: calc(-3 * var(--cell-height));
+  --num2-value: 3;
 
   --num2-lb1-inc: block;
   --num2-lb2-inc: none;
@@ -486,7 +527,7 @@ label[for="op-cb2"] {
   --num2-lb4-dec: none;
 }
 #num2-cb1 ~ #num2-cb2 ~ #num2-cb3:checked ~ #num2-cb4 ~ .content {
-  --num2-top-margin: calc(-4 * var(--cell-height));
+  --num2-value: 4;
 
   --num2-lb1-inc: none;
   --num2-lb2-inc: none;
@@ -499,7 +540,7 @@ label[for="op-cb2"] {
   --num2-lb4-dec: none;
 }
 #num2-cb1 ~ #num2-cb2 ~ #num2-cb3:checked ~ #num2-cb4:checked ~ .content {
-  --num2-top-margin: calc(-5 * var(--cell-height));
+  --num2-value: 5;
 
   --num2-lb1-inc: block;
   --num2-lb2-inc: none;
@@ -512,7 +553,7 @@ label[for="op-cb2"] {
   --num2-lb4-dec: block;
 }
 #num2-cb1:checked ~ #num2-cb2 ~ #num2-cb3:checked ~ #num2-cb4:checked ~ .content {
-  --num2-top-margin: calc(-6 * var(--cell-height));
+  --num2-value: 6;
 
   --num2-lb1-inc: none;
   --num2-lb2-inc: block;
@@ -525,7 +566,7 @@ label[for="op-cb2"] {
   --num2-lb4-dec: none;
 }
 #num2-cb1:checked ~ #num2-cb2:checked ~ #num2-cb3:checked ~ #num2-cb4:checked ~ .content {
-  --num2-top-margin: calc(-7 * var(--cell-height));
+  --num2-value: 7;
 
   --num2-lb1-inc: block;
   --num2-lb2-inc: none;
@@ -538,7 +579,7 @@ label[for="op-cb2"] {
   --num2-lb4-dec: none;
 }
 #num2-cb1 ~ #num2-cb2:checked ~ #num2-cb3:checked ~ #num2-cb4:checked ~ .content {
-  --num2-top-margin: calc(-8 * var(--cell-height));
+  --num2-value: 8;
 
   --num2-lb1-inc: none;
   --num2-lb2-inc: none;
@@ -551,7 +592,7 @@ label[for="op-cb2"] {
   --num2-lb4-dec: none;
 }
 #num2-cb1 ~ #num2-cb2:checked ~ #num2-cb3 ~ #num2-cb4:checked ~ .content {
-  --num2-top-margin: calc(-9 * var(--cell-height));
+  --num2-value: 9;
 
   --num2-lb1-inc: none;
   --num2-lb2-inc: none;
