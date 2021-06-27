@@ -1,16 +1,7 @@
 :root {
-  /* dark theme colors */
-  --dark-bg: teal;
-  --dark-bg2: orangered;
-  --dark-text: white;
-  /* light theme colors */
-  --light-bg: lightblue;
-  --light-bg2: lightsalmon;
-  --light-text: black;
-
-  /* default colors */
-  --bg-color: var(--dark-bg);
-  --text-color: var(--dark-text);
+  /* colors */
+  --bg-color: darkslateblue;
+  --text-color: white;
 
   /* sizes */
   --display-border: 1rem;
@@ -75,24 +66,6 @@
 
 @media (max-width: 990px) {
   :root {
-    --display-border: 0.75rem;
-    --cell-height: 10rem;
-    --cell-width: 6rem;
-    --section-margin: 0.75rem;
-  }
-}
-
-@media (max-width: 767px) {
-  :root {
-    --display-border: 0.5rem;
-    --cell-height: 8rem;
-    --cell-width: 4rem;
-    --section-margin: 0.5rem;
-  }
-}
-
-@media (max-width: 575px) {
-  :root {
     --display-border: 0.5rem;
     --cell-height: 8rem;
     --cell-width: 4rem;
@@ -126,7 +99,7 @@
   justify-content: center;
   flex-wrap: wrap;
   min-height: 100vh;
-  transition: all 0.3s ease;
+  /* transition: all 0.3s ease; */
 }
 
 /* Section */
@@ -182,66 +155,7 @@
   right: calc(-1 * var(--display-border));
 }
 
-/* Num1 label states */
-.inc label[for="num1-cb1"] {
-  display: var(--num1-lb1-inc);
-}
-.inc label[for="num1-cb2"] {
-  display: var(--num1-lb2-inc);
-}
-.inc label[for="num1-cb3"] {
-  display: var(--num1-lb3-inc);
-}
-.inc label[for="num1-cb4"] {
-  display: var(--num1-lb4-inc);
-}
-.dec label[for="num1-cb1"] {
-  display: var(--num1-lb1-dec);
-}
-.dec label[for="num1-cb2"] {
-  display: var(--num1-lb2-dec);
-}
-.dec label[for="num1-cb3"] {
-  display: var(--num1-lb3-dec);
-}
-.dec label[for="num1-cb4"] {
-  display: var(--num1-lb4-dec);
-}
-
-/* Num2 label states */
-.inc label[for="num2-cb1"] {
-  display: var(--num2-lb1-inc);
-}
-.inc label[for="num2-cb2"] {
-  display: var(--num2-lb2-inc);
-}
-.inc label[for="num2-cb3"] {
-  display: var(--num2-lb3-inc);
-}
-.inc label[for="num2-cb4"] {
-  display: var(--num2-lb4-inc);
-}
-.dec label[for="num2-cb1"] {
-  display: var(--num2-lb1-dec);
-}
-.dec label[for="num2-cb2"] {
-  display: var(--num2-lb2-dec);
-}
-.dec label[for="num2-cb3"] {
-  display: var(--num2-lb3-dec);
-}
-.dec label[for="num2-cb4"] {
-  display: var(--num2-lb4-dec);
-}
-/* Op label states */
-label[for="op-cb1"] {
-  display: var(--op-lb1);
-}
-label[for="op-cb2"] {
-  display: var(--op-lb2);
-}
-
-/* Counter display */
+/* Counter display (frame) */
 .display {
   border: var(--display-border) outset white;
   height: calc(var(--cell-height) + var(--display-border) * 2);
@@ -266,15 +180,12 @@ label[for="op-cb2"] {
 }
 
 .cell {
-  /* colors */
   color: white;
   background-color: black;
   border: 2px solid white;
-  /* sizes */
   font-size: calc(var(--cell-height) / 2);
   height: var(--cell-height);
   width: var(--cell-width);
-  /* alignmnet */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -321,6 +232,16 @@ label[for="op-cb2"] {
 }
 #result-ones.cells {
   margin-top: var(--result-ones-margin);
+}
+
+/* Operand type and result calc logic */
+
+/* Op label states */
+label[for="op-cb1"] {
+  display: var(--op-lb1);
+}
+label[for="op-cb2"] {
+  display: var(--op-lb2);
 }
 
 /* Gray code */
@@ -376,6 +297,60 @@ label[for="op-cb2"] {
 
   --op-lb1: none;
   --op-lb2: block;
+}
+
+/* Number input logic */
+
+/* Num1 label states */
+.inc label[for="num1-cb1"] {
+  display: var(--num1-lb1-inc);
+}
+.inc label[for="num1-cb2"] {
+  display: var(--num1-lb2-inc);
+}
+.inc label[for="num1-cb3"] {
+  display: var(--num1-lb3-inc);
+}
+.inc label[for="num1-cb4"] {
+  display: var(--num1-lb4-inc);
+}
+.dec label[for="num1-cb1"] {
+  display: var(--num1-lb1-dec);
+}
+.dec label[for="num1-cb2"] {
+  display: var(--num1-lb2-dec);
+}
+.dec label[for="num1-cb3"] {
+  display: var(--num1-lb3-dec);
+}
+.dec label[for="num1-cb4"] {
+  display: var(--num1-lb4-dec);
+}
+
+/* Num2 label states */
+.inc label[for="num2-cb1"] {
+  display: var(--num2-lb1-inc);
+}
+.inc label[for="num2-cb2"] {
+  display: var(--num2-lb2-inc);
+}
+.inc label[for="num2-cb3"] {
+  display: var(--num2-lb3-inc);
+}
+.inc label[for="num2-cb4"] {
+  display: var(--num2-lb4-inc);
+}
+.dec label[for="num2-cb1"] {
+  display: var(--num2-lb1-dec);
+}
+.dec label[for="num2-cb2"] {
+  display: var(--num2-lb2-dec);
+}
+.dec label[for="num2-cb3"] {
+  display: var(--num2-lb3-dec);
+}
+.dec label[for="num2-cb4"] {
+  display: var(--num2-lb4-dec);
 }
 
 /* Excess-3 Gray code */
