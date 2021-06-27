@@ -16,6 +16,7 @@
   --display-border: 1rem;
   --cell-height: 20rem;
   --cell-width: 12rem;
+  --section-margin: 1rem;
 
   /* counter state */
   --num1-value: 0;
@@ -54,6 +55,51 @@
   --op-lb2: none;
 }
 
+@media (max-width: 1400px) {
+  :root {
+    --display-border: 0.75rem;
+    --cell-height: 15rem;
+    --cell-width: 9rem;
+    --section-margin: 0.75rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  :root {
+    --display-border: 0.75rem;
+    --cell-height: 12rem;
+    --cell-width: 8rem;
+    --section-margin: 0.75rem;
+  }
+}
+
+@media (max-width: 990px) {
+  :root {
+    --display-border: 0.75rem;
+    --cell-height: 10rem;
+    --cell-width: 6rem;
+    --section-margin: 0.75rem;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --display-border: 0.5rem;
+    --cell-height: 8rem;
+    --cell-width: 4rem;
+    --section-margin: 0.5rem;
+  }
+}
+
+@media (max-width: 575px) {
+  :root {
+    --display-border: 0.5rem;
+    --cell-height: 8rem;
+    --cell-width: 4rem;
+    --section-margin: 0.5rem;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -78,14 +124,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   min-height: 100vh;
   transition: all 0.3s ease;
 }
 
 /* Section */
 .section {
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin-left: var(--section-margin);
+  margin-right: var(--section-margin);
 }
 
 /* Counter */
@@ -96,23 +143,23 @@
 
 /* Counter buttons */
 .inc {
-  margin-bottom: 2rem;
+  margin-bottom: calc(2 * var(--section-margin));
 }
 .inc::after {
   content: "▲Inc▲";
 }
 .dec {
-  margin-top: 2rem;
+  margin-top: calc(2 * var(--section-margin));
 }
 .dec:after {
   content: "▼Dec▼";
 }
 .button {
   color: black;
-  font-size: 2rem;
+  font-size: calc(var(--display-border) * 2);
   background-color: white;
   border: var(--display-border) outset white;
-  height: 4rem;
+  height: calc(var(--display-border) * 4);
   width: calc(var(--cell-width) + var(--display-border) * 2);
   display: flex;
   align-items: center;
@@ -224,7 +271,7 @@ label[for="op-cb2"] {
   background-color: black;
   border: 2px solid white;
   /* sizes */
-  font-size: 10rem;
+  font-size: calc(var(--cell-height) / 2);
   height: var(--cell-height);
   width: var(--cell-width);
   /* alignmnet */
